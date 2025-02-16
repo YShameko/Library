@@ -25,9 +25,8 @@ urlpatterns = [
     path('', client.views.index, name='home_page'),  # check again!
     path('about/', client.views.about, name='about_page'),  # check again!
     path('client/', include('client.urls')),
-
     path('librarian/', include('librarian.urls')),
-    path('login', client.views.login, name='login'),
-    path('logout', client.views.logout, name='logout'),
-    path('register', client.views.register, name='register'),
+    path('login/', client.views.login_handler, name='login'),
+    path('logout/', client.views.logout_handler, name='logout'),
+    path('register/', client.views.register, name='register'),
 ]

@@ -66,8 +66,13 @@
         <h1>Ласкаво просимо до бібліотеки</h1>
         <input type="text" placeholder="Логін">
         <input type="password" placeholder="Пароль">
-        <button>Увійти</button>
-        <button>Реєстрація</button>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            <button>Увійти</button>
+        </form>
+        <form action="/register/" method="get">
+            <button>Реєстрація</button>
+        </form>
     </div>
 </body>
 </html>

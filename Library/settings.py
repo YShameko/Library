@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'librarian.apps.LibrarianConfig',
     'client.apps.ClientConfig',
+    'book.apps.BookConfig',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_PROFILE_MODULE = 'client.UserProfile'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
