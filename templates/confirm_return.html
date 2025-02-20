@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Підтвердити повернення</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+{% include 'menu_cli.html' %}
+<body>
+    {% if books %}
+        <h1>Підтвердіть повернення цих книг</h1>
+        <table>
+            <thead>
+                <tr>
+                <td> Автор </td>
+                <td> Назва книги </td>
+                <td> Видавництво </td>
+                <td> Рік видання </td>
+                <td> Користувач </td>
+                <td> Коментар </td>
+                <td> Підтвердити повернення </td>
+                </tr>
+            </thead>
+            <form action="confirm_return/" method="post">
+                {% csrf_token %}
+                {% for book in books %}
+                  <tr>
+                    <td> {{ book.book_id.author.name }} </td>
+                    <td> {{ book.book_id.title }} </td>
+                    <td> {{ book.book_id.publisher.name }} </td>
+                    <td> {{ book.book_id.publish_year }} </td>
+                    <td> {{ book.user_id.username }} </td>
+                    <td> <input type="text" name="comments"> </td>
+                    <td> <input type="checkbox" name="can_be_closed"> </td>
+                  </tr>                    
+                {% endfor %}
+            </form>
+        </table>
+    {% else %}
+        <h1>Все гаразд, наразі немає книг для підтвердження</h1>
+    {% endif %} 
+</body>
+</html>

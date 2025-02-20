@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Обрати книгу</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+{% include 'menu_cli.html' %}
+<body>
+    <h1>{{ title }}</h1>
+    <p>Підказка: можеш відібрати книги за автором чи жанром. <br>
+        Або просто знайди потрібну тобі книгу у списку</p>
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Пошук</button>
+    </form>
+    <br>
+    <table>
+        <thead>  <tr>
+            <td> Автор </td>
+            <td> Назва книги </td>
+            <td> Жанр </td>
+            <td> Рейтинг </td>
+                </tr>
+        </thead>
+        {% for book in books %}
+          <tr>
+            <td> <a href="{{ book.id }}">{{ book.author.name }}</a></td>
+            <td> <a href="{{ book.id }}">{{ book.title }}</a> </td>
+            <td> <a href="{{ book.id }}">{{ book.genre.name }}</a> </td>
+            <td> <a href="{{ book.id }}">{{ book.rating }}</a> </td>
+          </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Надіслати нагадування</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+{% include 'menu_lib.html' %}
+<body>
+    {% if books %}
+        <h1>Варто б нагадати цим користувачам, про повернення книг</h1>
+        <table>
+        <thead>  <tr>
+            <td> Користувач </td>
+            <td> Автор </td>
+            <td> Назва книги </td>
+            <td> Має повернути до </td>
+            <td> Нагадати </td>
+                </tr>
+        </thead>
+                
+        <form action="send_reminder/" method="post">
+        {% csrf_token %}
+        {% for book in books %}
+          <tr>
+            <td> {{ book.user_id.username }} </td>
+            <td> {{ book.author.name }} </td>
+            <td> {{ book.title }} </td>
+            <td> {{ book.to_date }} </td>
+            <td> <input type="checkbox" name="send_reminder" value={{ book.send_reminder }}> </td>
+          </tr>
+        {% endfor %}
+        <button type="submit" value="Надіслати нагадування"></button>
+        </form>
+        </table>
+        
+    {% else %}
+        <h1>Все гаразд, поки немає про що хвилюватися!</h1>
+    {% endif %}
+
+</body>
+</html>

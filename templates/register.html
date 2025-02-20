@@ -5,9 +5,11 @@
     <title>Реєстрація</title>
 </head>
 <body>
+    <h1>Отже, почнемо реєстрацію:</h1>
     <form action="/register/" method="post">
         {% csrf_token %}
         {{register_form}}
+        <br>
         <input type="submit">
         <input type="reset">
     </form>

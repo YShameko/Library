@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Додати книгу</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+{% include 'menu_lib.html' %}
+<body>
+
+    <form action="/librarian/add_book/" method="post" enctype="multipart/form-data" class="container mt-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <h1>Давай додамо нову книгу в нашу бібліотеку:</h1>
+            {{ add_book_form }}
+        </div>    
+        <br>
+        <button type="submit" class="btn btn-primary">Додати книгу</button>
+    </form>
+</body>
+</html>
+

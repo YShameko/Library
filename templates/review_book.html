@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <title>Написати відгук</title>
 </head>
+{% include 'menu_cli.html' %}
 <body>
-
+    <h1>Тут ти можеш написати відгук на книгу</h1>
+    <p>Автор: <b>{{ book.author.name }}</b></p>
+    <p>Назва: <b>{{ book.title }}</b></p>
+    <p>Видавництво: <b>{{ book.publisher.name }}</b></p>
+    <p>Рік: <b>{{ book.publish_year }}</b></p>
+    
+    <form action="/client/review_book/{{ book.id }}" method="post">
+        {% csrf_token %}
+        <textarea name="text" rows="8" cols="40">Твій відгук </textarea>
+        <p>Рейтинг:<input type="number" name="rating" value={{ book.rating }}></p>
+        <input type="submit" value="Зберегти відгук">
+    </form>    
 </body>
 </html>

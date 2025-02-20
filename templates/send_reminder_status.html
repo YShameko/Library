@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Результати нагадування</title>
+</head>
+<body>
+    <p>Було надіслано нагадування користувачам:</p>
+    <br>
+    {% for user in users %}
+        {{ user.username }} :
+        {{ user.first_name }}
+        {{ user.last_name }} --> {{ user.message_status }}
+        <br>
+    {% endfor %}
+</body>
+</html>

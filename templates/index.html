@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('main_image.webp') no-repeat center center/cover;
+            background: url('templates/main_image.webp') no-repeat center center/cover;
             font-family: Arial, sans-serif;
             position: relative;
         }
@@ -64,10 +64,10 @@
 <body>
     <div class="container">
         <h1>Ласкаво просимо до бібліотеки</h1>
-        <input type="text" placeholder="Логін">
-        <input type="password" placeholder="Пароль">
-        <form action="/login" method="post">
+        <form action="/login/" method="post">
             {% csrf_token %}
+            <input type="text" placeholder="Логін" name="username">
+            <input type="password" placeholder="Пароль" name="password">
             <button>Увійти</button>
         </form>
         <form action="/register/" method="get">

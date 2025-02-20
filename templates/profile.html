@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Особистий кабінет</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+{% include 'menu_cli.html' %}
+<body>
+    <h1>Особистий кабінет користувача</h1>
+    <p>username: <b>{{ user.username }}</b></p>
+    <p>Ім'я: <b>{{ user.first_name }}</b></p>
+    <p>Прізвище: <b>{{ user.last_name }}</b></p>
+    <p>e-mail:: <b>{{ user.email }}</b></p>
+    
+    {% if fav_genres or fav_authors %}
+        <h3>Мені подобаються:</h3>
+        {% if fav_authors %}
+            <p><b>Автори:</b>
+            {% for author in fav_authors %}
+                {{ author.author.name }},
+            {% endfor %}
+            </p>
+        {% endif %} 
+    
+        {% if fav_genres %}
+            <p><b>Жанри:</b>
+            {% for genre in fav_genres %}
+                {{ genre.genre.name }},
+            {% endfor %}
+            </p>
+        {% endif %}
+    {% endif %}
+    
+    <h2>Книги, які я читаю:</h2>
+    <table>
+        <thead>  <tr>
+            <td> Автор </td>
+            <td> Назва книги </td>
+            <td> Жанр </td>
+            <td> Рейтинг </td>
+            <td> Взяв </td>
+            <td>  Повернути до</td>
+            <td>  Повернути зараз</td>
+            <td>  Написати відгук</td>
+                </tr>
+        </thead>
+        {% for book in my_books %}
+          <tr>
+            <td> {{ book.book.author.name }} </td>
+            <td> {{ book.book.title }} </td>
+            <td> {{ book.book.genre.name }} </td>
+            <td> {{ book.book.rating }} </td>
+            <td> {{ book.from_date }} </td>
+            <td> {{ book.to_date }} </td>
+            <td> <a href="/client/return_the_book/{{ book.book.id }}">повернути</a> </td>
+            <td> <a href="/client/review_book/{{ book.book.id }}">відгук</a> </td>
+          </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <h2>Що б мені <a href="/client/suggest_book/">почитати ще?</a></h2> 
+
+</body>
+</html>
