@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Результати нагадування</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
+{% include 'menu_lib.html' %}
 <body>
-    <p>Було надіслано нагадування користувачам:</p>
-    <br>
-    {% for user in users %}
-        {{ user.username }} :
-        {{ user.first_name }}
-        {{ user.last_name }} --> {{ user.message_status }}
-        <br>
+    <h2>Було надіслано нагадування користувачам:</h2>
+    
+    {% for message in messages %}
+        {{ message.user.username }}, на email: {{ message.user.email }} <br> 
+        про книгу: {{ message.book.title }} 
+        <br> <hr>
     {% endfor %}
 </body>
 </html>

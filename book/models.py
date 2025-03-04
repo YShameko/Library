@@ -52,6 +52,6 @@ class Borrowed(models.Model):
     book = models.ForeignKey(Books, on_delete=models.CASCADE)
     from_date = models.DateField()
     to_date = models.DateField()
-    closed = models.BooleanField(default=False)
-    ready_to_return = models.BooleanField(default=False)
+    status = models.TextField(null=True)  # "reader" or "returned"
+    confirmed = models.BooleanField(default=False)
     comments = models.CharField(max_length=500)

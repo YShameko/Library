@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Додати видавництво</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+    {% block content %}
+      <h2>Додати видавництво</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Додати</button>
+      </form>
+      <a href="{% url 'add_book_page' %}">Назад</a>
+    {% endblock %}
+</body>
+</html>

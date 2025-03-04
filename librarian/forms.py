@@ -2,12 +2,11 @@ from django import forms
 from book.models import Authors, Genres, Publishers, Books
 import datetime
 
-
 class AddBookForm(forms.ModelForm):
     class Meta:
         model = Books
-        fields = ['title', 'author', 'genre', 'publisher', 'publish_year', 'reception_date', 'cover', 'rating',
-                  'quantity']
+        fields = ['title', 'author', 'genre', 'publisher', 'publish_year',
+                  'reception_date', 'cover', 'rating', 'quantity']
 
     title = forms.CharField(label="Назва книги", max_length=250, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
@@ -52,3 +51,19 @@ class AddBookForm(forms.ModelForm):
         initial=1,
         widget=forms.NumberInput(attrs={'class': 'form-control'})
     )
+
+#--------------------------------------------------------------
+class AddAuthorForm(forms.ModelForm):
+    class Meta:
+        model = Authors
+        fields = ['name', 'bio', 'rating']
+
+class AddGenreForm(forms.ModelForm):
+    class Meta:
+        model = Genres
+        fields = ['name', 'rating']
+
+class AddPublisherForm(forms.ModelForm):
+    class Meta:
+        model = Publishers
+        fields = ['name', 'rating']

@@ -34,8 +34,8 @@ class RegisterForm(forms.ModelForm):
         return user
 
 class UpdateProfileForm(forms.Form):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}), label="Ім'я")
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}), label="Прізвище")
     email = forms.EmailField(widget=forms.TextInput(attrs={'class':'form-control'}))
     # password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
 

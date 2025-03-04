@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мої данні</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+    <h1>Змінити данні профілю:</h1>
+    <form action="{% url 'edit_profile' %}" method="post">
+        {% csrf_token %}
+        {{edit_profile_form.as_p}}
+        <br>
+        <input type="submit" value=" зберегти зміни ">
+    </form>
+</body>
+</html>

@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Рекомендації</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
 {% include 'menu_cli.html' %}
 <body>
+    <h2>Рекомендуємо почитати такі книги:</h2>
+    <table>
+        <thead>  <tr>
+            <td> Автор </td>
+            <td> Назва книги </td>
+            <td> Жанр </td>
+            <td> Рейтинг </td>
+                </tr>
+        </thead>
+        {% for book in books %}
+          <tr>
+            <td> <a href="/client/borrow_book/{{ book.id }}">{{ book.author.name }}</a></td>
+            <td> <a href="/client/borrow_book/{{ book.id }}">{{ book.title }}</a> </td>
+            <td> <a href="/client/borrow_book/{{ book.id }}">{{ book.genre.name }}</a> </td>
+            <td> <a href="/client/borrow_book/{{ book.id }}">{{ book.rating }}</a> </td>
+          </tr>
+        {% endfor %}
+    </table>
 
 </body>
 </html>

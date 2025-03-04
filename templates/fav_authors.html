@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Улюблені автори</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+    <h3>Мої улюблені автори:</h3>
+    <form method="post">
+        {% csrf_token %}
+        {% for author in authors %}
+            <label>
+                <input type="checkbox" name="fav_authors" value="{{ author.id }}" 
+                       {% if author in fav_authors %}checked{% endif %}>
+                {{ author.name }}
+            </label><br>
+        {% endfor %}
+        <br>
+        <button type="submit">Зберегти зміни</button>
+    </form>
+    
+</body>
+</html>

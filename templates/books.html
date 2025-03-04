@@ -5,7 +5,13 @@
     <title>Обрати книгу</title>
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
-{% include 'menu_cli.html' %}
+{% if user_group == 'client' %}
+    {% include 'menu_cli.html' %}
+{% elif user_group == 'librarian' %}    
+    {% include 'menu_lib.html' %}
+{% else %}
+    {% include 'menu_anon.html' %}
+{% endif %}
 <body>
     <h1>{{ title }}</h1>
     <p>Підказка: можеш відібрати книги за автором чи жанром. <br>

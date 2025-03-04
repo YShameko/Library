@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Повернення книг</title>
+    <title>Видача книг</title>
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
 {% include 'menu_lib.html' %}
 <body>
     {% if books %}
-        <h1>Підтвердіть повернення цих книг:</h1>
-        <form action="{% url 'confirm_return_page' %}" method="post">
+        <h1>Підтвердіть видачу цих книг</h1>
+        <form action="{% url 'confirm_borrow_page' %}" method="post">
         {% csrf_token %}
         <table>
             <thead>
@@ -25,17 +25,18 @@
             </thead>
                 {% for book in books %}
                   <tr>
-                    <td> {{ book.book.author.name }}</td>
+                    <td> {{ book.book.author.name }} </td>
                     <td> {{ book.book.title }} </td>
                     <td> {{ book.book.publisher.name }} </td>
                     <td> {{ book.book.publish_year }} </td>
                     <td> {{ book.user.username }} </td>
                     <td> {{ book.comments }} </td>
-                    <td> <input type="checkbox" name="confirmed" value={{ book.id }} unchecked> </td>
+                    <td> <input type="checkbox" name="confirmed" value={{ book.id }}> </td>
                   </tr>                    
                 {% endfor %}
-        </table> <br>
-            <input type="submit" value="Підтвердити повернення">
+        </table>
+            <br>
+            <input type="submit" value="Підтвердити видачу">
         </form> 
         
     {% else %}

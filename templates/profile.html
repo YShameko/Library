@@ -5,61 +5,98 @@
     <title>Особистий кабінет</title>
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
-{% include 'menu_cli.html' %}
+{% if user_group == 'client' %}
+    {% include 'menu_cli.html' %}
+{%  elif user_group == 'librarian' %}    
+    {% include 'menu_lib.html' %}
+{% else %}
+    {% include 'menu_anon.html' %}
+{% endif %}
 <body>
     <h1>Особистий кабінет користувача</h1>
     <p>username: <b>{{ user.username }}</b></p>
     <p>Ім'я: <b>{{ user.first_name }}</b></p>
     <p>Прізвище: <b>{{ user.last_name }}</b></p>
     <p>e-mail:: <b>{{ user.email }}</b></p>
+    <a href="/client/profile/edit">редагувати</a><br><br>
+    <h3>Мені подобаються:</h3>
+    <p><b>Автори:</b>
+    {% if fav_authors %}
+        {% for author in fav_authors %}
+            {{ author.author.name }},
+        {% endfor %}
+    {% endif %} 
+    </p>
+    <form action="fav_authors/" method="get">
+        <input type="submit" name="fav_authors" value="додати/змінити">
+    </form>
+    <p><b>Жанри:</b>
+    {% if fav_genres %}
+        {% for genre in fav_genres %}
+            {{ genre.genre.name }},
+        {% endfor %}
+    {% endif %}
+    </p>
+    <form action="fav_genres/" method="get">
+        <input type="submit" name="fav_genres" value="додати/змінити">
+    </form>
     
-    {% if fav_genres or fav_authors %}
-        <h3>Мені подобаються:</h3>
-        {% if fav_authors %}
-            <p><b>Автори:</b>
-            {% for author in fav_authors %}
-                {{ author.author.name }},
+    <br>
+    <h2>Що б мені <a href="/client/suggest_book/">почитати ще?</a></h2>     
+    {% if my_books %}
+        <h2>Книги, які я зараз читаю:</h2>
+        <table>
+            <thead>  <tr>
+                <td> Автор </td>
+                <td> Назва книги </td>
+                <td> Жанр </td>
+                <td> Рейтинг </td>
+                <td> Взяв </td>
+                <td>  Повернути до</td>
+                <td>  або зараз</td>
+                <td>  Написати відгук</td>
+                    </tr>
+            </thead>
+            {% for book in my_books %}
+              <tr>
+                <td> {{ book.book.author.name }} </td>
+                <td> {{ book.book.title }} </td>
+                <td> {{ book.book.genre.name }} </td>
+                <td> {{ book.book.rating }} </td>
+                <td> {{ book.from_date }} </td>
+                <td> {{ book.to_date }} </td>
+                <td> <a href="/client/return_the_book/{{ book.book.id }}">повернути</a> </td>
+                <td> <a href="/client/review_book/{{ book.book.id }}">відгук</a> </td>
+              </tr>
             {% endfor %}
-            </p>
-        {% endif %} 
-    
-        {% if fav_genres %}
-            <p><b>Жанри:</b>
-            {% for genre in fav_genres %}
-                {{ genre.genre.name }},
-            {% endfor %}
-            </p>
-        {% endif %}
+        </table>
     {% endif %}
     
-    <h2>Книги, які я читаю:</h2>
-    <table>
-        <thead>  <tr>
-            <td> Автор </td>
-            <td> Назва книги </td>
-            <td> Жанр </td>
-            <td> Рейтинг </td>
-            <td> Взяв </td>
-            <td>  Повернути до</td>
-            <td>  Повернути зараз</td>
-            <td>  Написати відгук</td>
-                </tr>
-        </thead>
-        {% for book in my_books %}
-          <tr>
-            <td> {{ book.book.author.name }} </td>
-            <td> {{ book.book.title }} </td>
-            <td> {{ book.book.genre.name }} </td>
-            <td> {{ book.book.rating }} </td>
-            <td> {{ book.from_date }} </td>
-            <td> {{ book.to_date }} </td>
-            <td> <a href="/client/return_the_book/{{ book.book.id }}">повернути</a> </td>
-            <td> <a href="/client/review_book/{{ book.book.id }}">відгук</a> </td>
-          </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <h2>Що б мені <a href="/client/suggest_book/">почитати ще?</a></h2> 
-
+    {% if prev_books %}
+        <h2>Книги, які вже прочитав:</h2>
+        <table>
+            <thead>  <tr>
+                <td> Автор </td>
+                <td> Назва книги </td>
+                <td> Жанр </td>
+                <td> Рейтинг </td>
+                <td> Взяв </td>
+                <td> Повернув</td>
+                <td> Написати відгук</td>
+                    </tr>
+            </thead>
+            {% for book in prev_books %}
+              <tr>
+                <td> {{ book.book.author.name }} </td>
+                <td> {{ book.book.title }} </td>
+                <td> {{ book.book.genre.name }} </td>
+                <td> {{ book.book.rating }} </td>
+                <td> {{ book.from_date }} </td>
+                <td> {{ book.to_date }} </td>
+                <td> <a href="/client/review_book/{{ book.book.id }}">відгук</a> </td>
+              </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
 </body>
 </html>

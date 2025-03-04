@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Улюблені жанри</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+
+<body>
+    <h3>Мої улюблені жанри:</h3>
+    <form method="post">
+        {% csrf_token %}
+        {% for genre in genres %}
+            <label>
+                <input type="checkbox" name="fav_genres" value="{{ genre.id }}" 
+                       {% if genre in fav_genres %}checked{% endif %}>
+                {{ genre.name }}
+            </label><br>
+        {% endfor %}
+        <br>
+        <button type="submit">Зберегти зміни</button>
+    </form>
+    
+</body>
+</html>

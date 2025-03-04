@@ -8,15 +8,63 @@
 {% include 'menu_lib.html' %}
 <body>
 
-    <form action="/librarian/add_book/" method="post" enctype="multipart/form-data" class="container mt-4">
-        {% csrf_token %}
-        <div class="mb-3">
-            <h1>Давай додамо нову книгу в нашу бібліотеку:</h1>
-            {{ add_book_form }}
-        </div>    
-        <br>
-        <button type="submit" class="btn btn-primary">Додати книгу</button>
-    </form>
+<form action="{% url 'add_book_page' %}" method="post" enctype="multipart/form-data" class="container mt-4">
+    <h1>Давай додамо нову книгу в нашу бібліотеку:</h1>
+    {% csrf_token %}
+    <label>Назва книги</label>
+    {{ add_book_form.title }}
+    <div class="mb-3">
+        <label for="id_author">Автор</label>
+        <div class="input-group">
+            {{ add_book_form.author }}
+            <a href="{% url 'add_author' %}" class="btn btn-outline-primary">Додати автора</a>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="id_genre">Жанр</label>
+        <div class="input-group">
+            {{ add_book_form.genre }}
+            <a href="{% url 'add_genre' %}" class="btn btn-outline-primary">Додати жанр</a>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="id_publisher">Видавництво</label>
+        <div class="input-group">
+            {{ add_book_form.publisher }}
+            <a href="{% url 'add_publisher' %}" class="btn btn-outline-primary">Додати видавництво</a>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label>Рік видання</label>
+            {{ add_book_form.publish_year }}
+        </div>
+        <div class="col-md-4">
+            <label>Дата надходження</label>
+            {{ add_book_form.reception_date }}
+        </div>
+        <div class="col-md-4">
+            <label>Рейтинг</label>
+            {{ add_book_form.rating }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label>Обкладинка</label>
+            {{ add_book_form.cover }}
+        </div>
+        <div class="col-md-6">
+            <label>Кількість</label>
+            {{ add_book_form.quantity }}
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Додати книгу</button>
+</form>
+
 </body>
 </html>
 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Повідомлення</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+{% if user_group == 'client' %}
+    {% include 'menu_cli.html' %}
+{%  elif user_group == 'librarian' %}
+    {% include 'menu_lib.html' %}
+{% else %}
+    {% include 'menu_anon.html' %}
+{% endif %}
+<body>
+ <h3>{{ message }}</h3>
+</body>
+</html>

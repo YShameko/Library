@@ -8,7 +8,9 @@
 {% include 'menu_lib.html' %}
 <body>
     {% if books %}
-        <h1>Варто б нагадати цим користувачам, про повернення книг</h1>
+        <h1>Варто б нагадати цим користувачам, про повернення книг:</h1>
+        <form action="/librarian/send_reminder/" method="post">
+        {% csrf_token %}
         <table>
         <thead>  <tr>
             <td> Користувач </td>
@@ -19,23 +21,22 @@
                 </tr>
         </thead>
                 
-        <form action="send_reminder/" method="post">
-        {% csrf_token %}
         {% for book in books %}
           <tr>
-            <td> {{ book.user_id.username }} </td>
-            <td> {{ book.author.name }} </td>
-            <td> {{ book.title }} </td>
+            <td> {{ book.user.username }} </td>
+            <td> {{ book.book.author.name }} </td>
+            <td> {{ book.book.title }} </td>
             <td> {{ book.to_date }} </td>
-            <td> <input type="checkbox" name="send_reminder" value={{ book.send_reminder }}> </td>
+            <td> <input type="checkbox" name="send_reminder" value={{ book.id }} checked>
+            </td>
           </tr>
         {% endfor %}
-        <button type="submit" value="Надіслати нагадування"></button>
-        </form>
+        <input type="submit" value="Надіслати нагадування">
         </table>
+        </form>
         
     {% else %}
-        <h1>Все гаразд, поки немає про що хвилюватися!</h1>
+        <h1>Все гаразд, поки що немає про що хвилюватися!</h1>
     {% endif %}
 
 </body>

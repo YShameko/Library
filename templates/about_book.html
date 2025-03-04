@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }}</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+{% if user_group == 'client' %}
+    {% include 'menu_cli.html' %}
+{% elif user_group == 'librarian' %}    
+    {% include 'menu_lib.html' %}
+{% else %}
+    {% include 'menu_anon.html' %}
+{% endif %}
+<body>
+    <div>
+        <p>Назва: <b>{{ book.title }}</b></p>
+        <p>Автор: <b>{{ book.author.name }}</b></p>
+        <p>Про автора: <b>{{ book.author.bio }}</b></p> 
+        <p>Жанр: <b>{{ book.genre }}</b></p>
+        <p>Видавництво: <b>{{ book.publisher }}</b></p>
+        <p>Рік видання: <b>{{ book.publish_year }}</b></p>
+        <p>Рейтинг: <b>{{ book.rating }}</b></p> <br><br>
+        {% if reviews %}
+            <p><b>Відгуки читачів: </b></p>
+            {% for review in reviews %}
+                <p>Від: {{ review.date }} Користувач: {{ review.user.username }} </p>
+                <p><i>{{ review.text }}</i></p>
+                <p>Оцінка: {{ review.rating }}</p>
+                ....................................................
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</body>
+</html>

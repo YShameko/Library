@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Про бібліотеку</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
+{% if user_group == 'client' %}
+    {% include 'menu_cli.html' %}
+{%  elif user_group == 'librarian' %}    
+    {% include 'menu_lib.html' %}
+{% else %}
+    {% include 'menu_anon.html' %}
+{% endif %}
 <body>
 <h1>Додаток "Бібліотека"</h1>
 <h2>Як клієнт я можу:</h2>
@@ -26,6 +34,33 @@
     <li>надсилати нагадування користувачам, в яких закінчується термін повернення книг</li>
     <li>переглядати список книг (редагувати в разі необхідності) та рецензій</li>
 </ul>
+
+<p>Повернутися на <a href="/">головну сторінку</a></p>
+<hr>
+<h2>Перелік ендпоінтів:</h2>
+<table>
+    <tr><td></td><td><b>Бібліотекар</b></td></tr>
+<tr><td><a href="/librarian/add_book">/librarian/add_book</a></td><td>додати нову книгу. може лише "бібліотекар"</td></tr>
+<tr><td><a href="/librarian/inventory">/librarian/inventory</a></td><td>перевірити залишки по книгах: які є в бібліотеці, які "на руках", строки повернення. доступ лише в "бібліотекаря".</td></tr>
+<tr><td><a href="/librarian/send_reminder">/librarian/send_reminder</a></td><td>надіслати нагадування користувачам, в яких закінчується термін повернення книг. лише для "бібліотекаря"</td></tr>
+<tr><td><a href="/librarian/confirmation/borrow">/librarian/confirmation/borrow</a></td><td>підтвердити, що книги були видані читачам</td></tr>
+<tr><td><a href="/librarian/confirmation/return">/librarian/confirmation/return</a></td><td>підтвердити, що книги були повернуті в належному стані</td></tr>
+    <tr><td></td><td><b>Читач</b></td></tr>
+<tr><td><a href="/client/profile/">/client/profile/</a></td><td>особистий кабінет читача: особиста інформація, історія (які книги брав, які потрібно повернути), улюблені</td></tr>
+<tr><td><a href="/client/profile/edit/">/client/profile/edit/</a></td><td>оновлення данних користувача</td></tr>
+<tr><td><a href="/client/profile/fav_authors/">/client/profile/fav_authors/</a></td><td>додати / змінити улюблених авторів</td></tr>
+<tr><td><a href="/client/profile/fav_genres/">/client/profile/fav_genres/</a></td><td>додати / змінити улюблені жанри</td></tr>
+<tr><td>><a href="/client/review_book/">/client/review_book/</a></td><td>написати рецензію на книгу</td></tr>
+<tr><td><a href="/client/borrow_book/">/client/borrow_book/</a></td><td>взяти книгу в бібліотеці (бібліотекар має підтвердити)</td></tr>
+<tr><td><a href="/client/return_books/">/client/return_books/</a></td><td>повернути книгу (після повернення, бібліотекар має підтвердити, що книгу повернули у нормальному стані та поставити статус confirmed)</td></tr>
+<tr><td><a href="/client/suggest_book/">/client/suggest_book/</a></td><td>отримати рекомендацію, що почитати ще</td></tr>
+<tr><td><a href="/client/book_rating/">/client/book_rating/</a></td><td>подивитися рейтинги книг в бібліотеці (також за жанром, за автором, ...)</td></tr>
+    <tr><td></td><td><b>Спільні</b></td></tr>
+<tr><td><a href="/login">/login</a>	</td><td></td></tr>
+<tr><td><a href="/logout">/logout</a>	</td><td></td></tr>
+<tr><td><a href="/register">/register</a></td><td></td></tr>
+<tr><td><a href="/about/">/about/</a></td><td>інфо про цей проект</td></tr>
+</table>
 
 <p>Повернутися на <a href="/">головну сторінку</a></p>
 </body>
